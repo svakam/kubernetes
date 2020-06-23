@@ -33,10 +33,23 @@ Some main advantages of using Kubernetes:
 - Open source. Fosters a more diverse community with more input. 
 - Backed by Google. 
 
-A computer, or host machine, can run a [server](#server), which is the physical hardware. The host [operating system](#operating-system) (OS) 
-
 ## Containers
 
+### Virtual Machines vs. Containers
+
+A computer, or host machine, can run a [server](#server), which is the physical hardware. The host [operating system](#operating-system) (OS) works on the [server](#server), and the [hypervisor](#hypervisor) works on the host OS to manage the guest OS's. Every guest OS is completely isolated and has its own binaries, libraries, and applications. 
+
+A [virtual machine](#virtual-machine) (VM) is defined by these components bundled together: the guest OS, binaries/libraries, and applications. A VM takes up to minutes to load before it's fully live. 
+
+A container is a considerably more lightweight version of the VM. Containers still contain the binaries/libraries and applications that a VM has, and the host OS still works on the server, but unique to the container configuration is a [Docker engine](#docker) (or other virtualization software) that manages the containers. Containers don't need to boot up the guest OS, which reduces wait time from minutes to almost instantaneously. Containers occupy a few megabytes of memory, but VMs occupy far more. 
+
+Containers on cloud providers function a little differently than those on traditional host OS's. Cloud providers inherently use hypervisors to isolate customers, which means one or more guest OS's is mounted on the hypervisor, and the container/s on top of the guest OS. The benefits of containerization are still reaped in a cloud setting, with the extra layer of abstraction between the host OS and container. 
+
+### Benefits of Docker
+
+Docker allows the compartmentalization and isolation of an application and its binaries/dependencies. This prevents the common issue of an application built and running successfully on an individual machine, but not running in production; the binary and dependencies needed for the application come packaged with it. Consequently, there is a closer parity between development, QA, and production environments. Development teams are able to ship product faster. The same Docker image can be run unmodified on personal machines, data center VMs, and cloud providers. Docker uses Linux containers (a [kernel](#kernel) feature) for OS-level isolation, which means the container isn't visible to the host or guest OS. 
+
+## Kubernetes Setup
 
 
 ## Glossary
@@ -45,11 +58,20 @@ A computer, or host machine, can run a [server](#server), which is the physical 
 
 #### container
 
+A considerably more lightweight version of the VM in terms of load time and storage. Consists of binaries, libraries, and applications seen in a virtual machine, but the guest operating system isn't required to boot. Dependent on virtualization software like Docker to be managed on top of the host OS and server. 
+
 #### Docker
-Set of [PaaS](#paas-platform-as-a-service) products developed by Docker, Inc. that uses OS-level virtualization to deliver software in packages called containers. [First mention](#intro)
+Set of [PaaS](#paas-platform-as-a-service) products developed by Docker, Inc. that uses OS-level virtualization to deliver software in packages called [containers](#container). [First mention](#intro)
+
+Docker is the most popular container software. An alternative to Docker is 'rkt', which also works with Kubernetes. 
+
+The Docker engine consists of the Docker [runtime](#runtime), software to run Docker images, and Docker Hub (an online service to store and fetch Docker images, and also build images online as opposed to on the host machine). 
+
+#### kernel
+Program at the core of an operating system; the part of an operating system that loads first and remains in main memory, providing basic services for all other parts of the OS. [First mention](#benefits-of-docker)
 
 #### hypervisor
-AKA virtual machine monitor, VMM. Computer software, firmware or hardware that creates and runs virtual machines or guest machines. Runs on top of the host machine and OS. 
+AKA virtual machine monitor, VMM. Computer software, firmware or hardware that creates and runs virtual machines or guest machines. Runs on top of the host machine and OS. [First mention](#intro)
 
 #### node
 
@@ -69,8 +91,11 @@ The platform's resources include:
 - Networking firewalls/security
 - Data center physical plant/building
 
+#### runtime system/environment
+Primarily implements portions of an execution model; in other words, the exeuction environment provided to an application or software by the operating system. 
+
 #### server
-Software or physical hardware that provides functionality for other programs or devices, called "clients". This architecture is called the client-server model. 
+Software or physical hardware that provides functionality for other programs or devices, called "clients". This architecture is called the client-server model. [First mention](#containers)
 
 #### virtual machine
-An emulation of a computer system. Based on computer architectures and provide functionality of a physical computer. Implementations may involve specialized hardware, software, or a combination.  a server (the physical machine), which has a host [operating system](#operating-system)
+An emulation of a computer system. Based on computer architectures and provide functionality of a physical computer. Implementations may involve specialized hardware, software, or a combination. A virtual machine (VM) or multiple VMs can be mounted on a [hypervisor](#hypervisor). Each VM consists of its own guest operating system, binaries/libraries, and applications, together which are isolated from other VMs that may be mounted on the host machine. [First mention](#containers)
