@@ -6,6 +6,7 @@ Cheat sheet for Kubernetes.
 
 Edward Viaene: DevOps, Cloud, Big Data Specialist
 
+
 ## Table of Contents
 1. [Intro](#intro)
 1. [Containers](#containers)
@@ -21,7 +22,7 @@ Long running services (i.e. Web applications) can be run on these containers.
 
 The states of these containers are managed by Kubernetes. It's possible to start the container on specific [nodes](#node). If a container is killed, it can be restarted. Containers have the ability to move from node to node. 
 
-Instead of just running a few docker containers on one host manually, Kubernetes will manage this and the containers in general. 
+Instead of just running a few Docker containers on one host manually, Kubernetes will manage this and the containers in general. 
 
 It's possible for Kubernetes clusters to have anywhere from one node up to thousands. 
 
@@ -51,6 +52,13 @@ Docker allows the compartmentalization and isolation of an application and its b
 
 ## Kubernetes Setup
 
+Kubernetes should be able to run anywhere, but there are additional integrations needed for some cloud providers, like AWS and GCP; for example, [volumes](#volume) and external load balancers work only with supported cloud providers. 
+
+[Minikube](#minikube) is a free tool that runs a single-node Kubernetes cluster inside a Linux VM. Minikube is best used for testing or development level work. It cannot spin up a production cluster, since it's a single-node machine with no high availability. DigitalOcean is a pay-to-use alternative tool that can also be used to run a single-node Kubernetes cluster on a local VM. 
+
+Minikube automatically spins up a VM to run Kubernetes in, which means a hypervisor is needed. [VirtualBox](#virtualbox) is an example of a virtualization application that provides a hypervisor for Windows. 
+
+kops is a tool that runs a cluster on AWS, and can be used to spin up a highly available production cluster. 
 
 ## Glossary
 
@@ -72,6 +80,9 @@ Program at the core of an operating system; the part of an operating system that
 
 #### hypervisor
 AKA virtual machine monitor, VMM. Computer software, firmware or hardware that creates and runs virtual machines or guest machines. Runs on top of the host machine and OS. [First mention](#intro)
+
+#### minikube
+Free tool that runs a single-node Kubernetes cluster inside a Linux VM. Best used for testing or development level work. Cannot spin up a production cluster, since it's a single-node machine with no high availability. Need virtualization software installed to run minikube (i.e. [VirtualBox](https://www.virtualbox.org/manual/UserManual.html#virt-why-useful)). 
 
 #### node
 
@@ -97,5 +108,11 @@ Primarily implements portions of an execution model; in other words, the exeucti
 #### server
 Software or physical hardware that provides functionality for other programs or devices, called "clients". This architecture is called the client-server model. [First mention](#containers)
 
+#### VirtualBox
+Oracle VM VirtualBox is a cross-platform virtualization application. It extends the capabilities of a computer to run multiple OS's inside multiple virtual machines at the same time. As a example, Windows and Linux can run on a Mac, run Windows server 2016 on a Linux sevrer, run Linux on Windows, and so on alongside existing applications. The only practical limitations to installing as many VMs as possible are disk space, memory, and whether the computer's architecture is Intel/AMD-based or not. [First mention](#minikube)
+
 #### virtual machine
 An emulation of a computer system. Based on computer architectures and provide functionality of a physical computer. Implementations may involve specialized hardware, software, or a combination. A virtual machine (VM) or multiple VMs can be mounted on a [hypervisor](#hypervisor). Each VM consists of its own guest operating system, binaries/libraries, and applications, together which are isolated from other VMs that may be mounted on the host machine. [First mention](#containers)
+
+#### volume
+AKA logical drive. A single accessible storage area with a single file system, typically (though not necessarily) resident on a single partition of a hard disk. 
